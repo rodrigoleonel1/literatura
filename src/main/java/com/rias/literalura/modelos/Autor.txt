@@ -1,0 +1,84 @@
+package com.rias.literalura.modelos;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity(name = "autores")
+@Table(name = "autores")
+public class Autor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
+    private String nombre;
+    private Integer añoNacimiento;
+    private Integer añoMuerte;
+    @OneToMany(mappedBy = "autor",cascade = CascadeType.ALL)
+    private List<Libro> libros;
+
+    public Autor(){
+        
+    }
+
+    public Autor(DatosAutor autor) {
+        this.nombre = autor.nombre();
+        this.añoNacimiento = autor.añoNacimiento();
+        this.añoMuerte = autor.añoMuerte();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+  
+    public Integer getAñoNacimiento() {
+        return añoNacimiento;
+    }
+
+    public void setAñoNacimiento(Integer añoNacimiento) {
+        this.añoNacimiento = añoNacimiento;
+    }
+
+    public Integer getAñoMuerte() {
+        return añoMuerte;
+    }
+
+    public void setAñoMuerte(Integer añoMuerte) {
+        this.añoMuerte = añoMuerte;
+    }
+
+    public List<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor [id=" + id + ", nombre=" + nombre + ", añoNacimiento=" + añoNacimiento + ", añoMuerte="
+                + añoMuerte + ", libros=" + libros + "]";
+    }
+
+}   
